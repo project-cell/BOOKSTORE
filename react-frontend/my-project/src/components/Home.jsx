@@ -18,13 +18,13 @@ function Home(){
     const [issearch, setissearch] = useState(false);
     const [showOver,setshowOver] = useState(false)
 
-
     useEffect(()=>{
         if(!localStorage.getItem('token')){
             navigate('/login')
 
         }
     },[])
+
     useEffect(()=>{
         const url = 'http://localhost:3000/get-books'
         axios.get(url)
@@ -40,8 +40,10 @@ function Home(){
           })
 
     },[])
-
     //useEffect is a hook that allows you to run some side effect after rendering the component
+
+
+
     const handlesearch=(value)=>{
         setsearch(value);
     }
@@ -58,7 +60,8 @@ function Home(){
             setissearch(true)
             
           }).catch((er)=>{
-        alert('something went wrong')
+            console.log(er);
+            alert('something went wrong')
           })
                 // let filteredBooks =Book.filter((item)=>{
                 //     // console.log(item)
@@ -103,9 +106,9 @@ function Home(){
             console.log(res)
             if (res.data.message){
                 alert('Liked:)')
-          console.log(er);
               }
           }).catch((er)=>{
+
         alert('something went wrong')
           })
         }

@@ -25,7 +25,7 @@ export default function Login() {
               }
                }  
            }).catch ((er)=>{
-              //  console.log(er);
+               console.log(er);
                alert('server error ')
            })
         }

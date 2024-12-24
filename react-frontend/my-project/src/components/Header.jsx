@@ -54,12 +54,6 @@ function Header(props){
         "longitude": 81.88385,
         "placeName": "Pryagraj, Uttar Pradesh"
         },
-
-        
-
-
-
-
 ]
 
 
