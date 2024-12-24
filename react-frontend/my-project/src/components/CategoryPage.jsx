@@ -98,9 +98,9 @@ function CategoryPage(){
             console.log(res)
             if (res.data.message){
                 alert('Liked:)')
-          console.log(er);
-              }
+          }
           }).catch((er)=>{
+            console.log(er);
         alert('something went wrong')
           })
         }

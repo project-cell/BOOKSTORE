@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 let schema = new mongoose.Schema({
     bookname: String,
     description: String,
@@ -15,11 +16,9 @@ let schema = new mongoose.Schema({
         coordinates:{
             type:[Number],
             }}
-
-    
     });
 
-    schema.index({pLoc: '2dsphere'})
+schema.index({pLoc: '2dsphere'})
 
 const Books =mongoose.model('Books',schema);
 
@@ -157,6 +156,6 @@ const myBooks =(req,res)=>{
         }
 )
 }
-export  {search, addProducts , getBooks, getBookId, myBooks
 
-};
+
+export  {search, addProducts , getBooks, getBookId, myBooks};

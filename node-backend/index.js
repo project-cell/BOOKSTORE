@@ -20,13 +20,11 @@ const upload = multer({ storage: storage })
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-import bcrypt from 'bcrypt';
-import jwt from "jsonwebtoken";
+// import bcrypt from 'bcrypt';
+// import jwt from "jsonwebtoken";
 // import bookController from './controllers/bookController.js'
-import {likeProducts, login, signup, userId,Myprofile, likedbooks}  from './controllers/userController.js'
+import {likeProducts, login, signup, userId,Myprofile,likedbooks,addProducts}  from './controllers/userController.js'
 import {search,getBooks,getBookId, myBooks} from './controllers/bookController.js'; // Make sure to include the .js extension
-import {addProducts} from './controllers/bookController.js'; // Make sure to include the .js extension
-
 
 dotenv.config();
 const app = express();
@@ -55,18 +53,6 @@ db.on("error", (error) => {
     console.log('Error in MongoDB server:', error);
 });
 
-// // User model
-// const UserSchema = new mongoose.Schema({
-//     username: { type: String, required: true },
-//     password: { type: String, required: true },
-//     email: { type: String, required: true },
-//     mobile: { type: Number, required: true },
-//     likedBooks : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Books'}]
-// });
-// const Users = mongoose.model('Users', UserSchema);
-
-
-
 // Routes
 app.get('/', (req, res) => {
     res.send("Hello World");
@@ -93,7 +79,6 @@ app.get('/get-user/:uId',userId)
 app.post('/signup',signup);
 
 app.post('/login', login)
-
 
 // Start server
 app.listen(port, () => {

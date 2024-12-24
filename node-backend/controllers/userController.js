@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import jwt from "jsonwebtoken";
+
 // User model
 const UserSchema = new mongoose.Schema({
     username: { type: String, required: true },
@@ -68,14 +69,11 @@ const login = async (req, res) => {
                 }
                 if(result.password != password){
                     res.send({message: 'password wrong'})
-                }
-               
-            }
+                }}
         }).catch(()=>{
             res.send({message: 'server error'})
         })
 }
-
 const userId =(req,res)=>{
     const _userId = req.params.uId
     Users.findOne({_id: _userId})
@@ -126,4 +124,6 @@ const likedbooks =(req,res)=>{
         }
 )
 }
+
+
 export {likeProducts,signup,login, userId,Myprofile,likedbooks};
