@@ -249,7 +249,7 @@ app.get('/my-profile/:userId',(req,res)=>{
 
     let uid = req.params.userId;
     Users.findOne({ _id: uid }).then((result) => {
-        console.log(result,"added books")
+        // console.log(result,"added books")
         res.send({message:'success',user:{
             username:result.username,
             email:result.email,
