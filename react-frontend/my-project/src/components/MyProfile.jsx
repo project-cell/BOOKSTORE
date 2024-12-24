@@ -31,7 +31,8 @@ export default function MyProfile() {
   return (
     <div >
         <Header /> 
-<div className=" items-center ml-20 p-10">
+
+<div className="  ml-20 p-10">
 <div className="text-center text-3xl p-3 font-bold italic mr-28 text-blue-500 ">
             My Profile
             </div>
