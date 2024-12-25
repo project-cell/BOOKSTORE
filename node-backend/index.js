@@ -53,8 +53,8 @@ app.use(express.urlencoded({ extended: false }));
 
 // MongoDB connection
 // const mongoURL =  'mongodb+srv://helloworld:Ho6oGu69Zd1yEygz@cluster0.yduksfk.mongodb.net/Bookrecycle?retryWrites=true&w=majority';
-const mongoURL =  'mongodb://localhost:27017/Bookrecycle';
-// const mongoURL =  'mongodb://127.0.0.1:27017/Bookrecycle';
+// const mongoURL =  'mongodb://localhost:27017/Bookrecycle';
+const mongoURL =  'mongodb://127.0.0.1:27017/Bookrecycle';
 mongoose.connect(mongoURL, {})
     .then(() => console.log('Connected to MongoDB server'))
     .catch((error) => {
