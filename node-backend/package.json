@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "  NPM_CONFIG_LOGLEVEL=error jest",
-    "start": "  NPM_CONFIG_LOGLEVEL=error node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "  node index.js",
     "dev": "nodemon index.js",
     "build": "npm run build"
   },
@@ -26,8 +26,5 @@
     "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.7",
     "uuid": "^11.0.3"
-  },
-  "devDependencies": {
-    "cross-env": "^7.0.3"
   }
 }
