@@ -7,8 +7,9 @@ function Categories(props){
   
     return (
         //  bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl overflow-hidden 
-         <div className='header bg-slate-200 cat-container text-xl text-rose-600 font-bold'> 
-    <span>All Categories
+       
+         <div className='rounded shadow-md h-16 bg-gray-200 cat-container text-xl text-rose-600 font-bold'> 
+    <span >All Categories
     </span>
     {/*  */}
     <div>
@@ -19,7 +20,8 @@ function Categories(props){
 
         })}
         </div>     
-        </div>       
+        </div>    
+     
         );
 }
 export default Categories;

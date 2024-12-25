@@ -23,8 +23,8 @@ const __dirname = dirname(__filename);
 // import bcrypt from 'bcrypt';
 // import jwt from "jsonwebtoken";
 // import bookController from './controllers/bookController.js'
-import {likeProducts, login, signup, userId,Myprofile,likedbooks,addProducts}  from './controllers/userController.js'
-import {search,getBooks,getBookId, myBooks} from './controllers/bookController.js'; // Make sure to include the .js extension
+import {likeProducts, login, signup, userId,Myprofile,likedbooks}  from './controllers/userController.js'
+import {search,getBooks,getBookId, myBooks,addProducts} from './controllers/bookController.js'; // Make sure to include the .js extension
 
 dotenv.config();
 const app = express();

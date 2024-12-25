@@ -56,24 +56,17 @@ function Header(props){
         },
 ]
 
-
     return (
         
-         <div className='header bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-slate-300 to-pink-200
+         <div className='header bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-blue-300 to-pink-200
     overflow-hidden '>     
     
     <h1 className=' text-center items-center font-bold  text-lg font-sans italic  bg-gradient-to-r  from-blue-700 to-indigo-950 text text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore 
         
     </h1>
-    
-      
             <div className="  flex justify-items-center gap-4 items-center max-w-6xl mx-auto p-2" >
-          
-
-           
             {/* <h1 className=' text-left place-items-start font-medium  bg-gradient-to-r from-teal-700 to-pink-700 text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore</h1> */}
                 <Link to ='/'> 
-                
                  <h1 className=' text-left place-items-start font-bold text-lg bg-gradient-to-r from-teal-700 to-pink-700  text-transparent bg-clip-text'>Home </h1>
                 </Link>
                 
@@ -104,7 +97,7 @@ function Header(props){
                 onChange={(e)=> props.handlesearch && props.handlesearch(e.target.value)
                 }
              />
-            <button className=" search-btn mr-auto   h-6 border-none bg-purple-300 pr-3 ml-0 pl-3 text-teal-700 " onClick={ () =>props.handleClick && props.handleClick()}>
+            <button className=" search-btn mr-auto shadow-md  h-6 border-none bg-purple-300 pr-3 ml-0 pl-3 text-teal-700 " onClick={ () =>props.handleClick && props.handleClick()}>
                  <FcSearch/>
                  </button>
                 {/* <input type="text"/> */}
