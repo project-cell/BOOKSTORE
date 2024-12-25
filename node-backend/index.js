@@ -26,8 +26,7 @@ const __dirname = dirname(__filename);
 // import bookController from './controllers/bookController.js'
 import {likeProducts, login, signup, userId,Myprofile,likedbooks}  from './controllers/userController.js'
 import {search,getBooks,getBookId, myBooks,addProducts} from './controllers/bookController.js'; // Make sure to include the .js extension
-// server.js (Node.js application)
-// require('dotenv').config(); // Load environment variables from .env file
+
 
 const API_URL = process.env.API_URL || 'http://localhost:3000'; // Fallback to default if not set
 console.log(API_URL); // Use the API URL
@@ -41,19 +40,19 @@ const port = 3000;
 
 // Middleware
 // Allow requests from both localhost and your Netlify
-const allowedOrigins = ['http://localhost:5173', 'https://charming-elf-5fd748.netlify.app'];
-app.use(cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-    credentials: true // If you need to allow cookies or authentication
-  }));
+        // const allowedOrigins = ['http://localhost:5173', 'https://charming-elf-5fd748.netlify.app'];
+        // app.use(cors({
+        //     origin: allowedOrigins,
+        //     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+        //     credentials: true // If you need to allow cookies or authentication
+        // }));
 // app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // MongoDB connection
-const mongoURL =  'mongodb+srv://helloworld:Ho6oGu69Zd1yEygz@cluster0.yduksfk.mongodb.net/Bookrecycle?retryWrites=true&w=majority';
-// const mongoURL =  'mongodb://localhost:27017/Bookrecycle';
+// const mongoURL =  'mongodb+srv://helloworld:Ho6oGu69Zd1yEygz@cluster0.yduksfk.mongodb.net/Bookrecycle?retryWrites=true&w=majority';
+const mongoURL =  'mongodb://localhost:27017/Bookrecycle';
 // const mongoURL =  'mongodb://127.0.0.1:27017/Bookrecycle';
 mongoose.connect(mongoURL, {})
     .then(() => console.log('Connected to MongoDB server'))
@@ -62,6 +61,7 @@ mongoose.connect(mongoURL, {})
         // process.exit(1);
     });
 
+    
 const db = mongoose.connection;
 db.on("disconnected", () => {
     console.log('Disconnected from MongoDB server');
@@ -71,12 +71,14 @@ db.on("error", (error) => {
 });
 
 // const allowedOrigins = ['http://localhost:5173', 'https://singular-sable-9f0800.netlify.app'];
+// Allow requests from both localhost and your Netlify
+ const allowedOrigins = ['http://localhost:5173', 'https://charming-elf-5fd748.netlify.app'];
 
-// app.use(cors({
-//   origin: allowedOrigins,
+app.use(cors({
+  origin: allowedOrigins,
 //   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-//   credentials: true // if you need to allow cookies or authentication
-// }));
+  credentials: true // if you need to allow cookies or authentication
+}));
 
 // Routes
 app.get('/', (req, res) => {

@@ -50,6 +50,7 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
     //const { username, password } = req.body;
+    console.log(req.body)
     const { email, password } = req.body;
     console.log(`Login attempt for username: ${email}`); // Log login attempt
 
