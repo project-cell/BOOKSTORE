@@ -4,6 +4,7 @@
     import { useNavigate,Link } from "react-router-dom"
     import axios from 'axios'
     import './Home.css'
+import API_URL from '../constants'
 
     export default function Add_product() {
         const navigate = useNavigate();
@@ -34,7 +35,7 @@
               formData.append('bookimage', bookimage);
               formData.append('userId', localStorage.getItem('userId'));
               
-              const url='http://localhost:3000/add-product';
+              const url = API_URL+'/add-product';
 
               axios.post(url,formData).then((res)=>{
                 if(res.data.message){

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './Header'
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import API_URL from '../constants';
 export default function Login() {
       const[loading,setLoading] =useState(false);
       const [email, setEmail] = useState("");
@@ -11,7 +12,7 @@ export default function Login() {
       const handleApi=()=>
         {
           //  console.log({password,email})
-           const url='http://localhost:3000/login'
+           const url=API_URL+'/login'
            const data={password,email}
            axios.post(url,data).then((res)=>{
               //  console.log(res.data);

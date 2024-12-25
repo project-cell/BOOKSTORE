@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Header from './Header'
 import { useNavigate,Link } from "react-router-dom"
 import axios from 'axios';// for backend connection
+import API_URL from '../constants';
 export default function Signup() {
     const navigate = useNavigate();
     const [username, setName] = useState("");
@@ -15,7 +16,7 @@ export default function Signup() {
     const handleApi=()=>
          {
             // console.log({username,password,email})
-            const url='http://localhost:3000/signup'
+            const url= API_URL + '/signup'
             const data={username,password,email,mobile}
             axios.post(url,data).then((res)=>{
                 // console.log(res.data);

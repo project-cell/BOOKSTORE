@@ -10,6 +10,7 @@ import { FaHeart } from 'react-icons/fa'
 import './Home.css'
 import { GrClearOption } from 'react-icons/gr'
 import { BiDetail } from 'react-icons/bi'
+import API_URL from "../constants.js";
 function Home(){
     const navigate = useNavigate();
     const [Book, setBook] = useState([]);
@@ -26,7 +27,7 @@ function Home(){
     },[])
 
     useEffect(()=>{
-        const url = 'http://localhost:3000/get-books'
+        const url = API_URL+'/get-books'
         axios.get(url)
         .then((res)=>{
             console.log(res)
@@ -51,7 +52,7 @@ function Home(){
         // console.log('clicked')
         // console.log('Book',Book)
         const userLoc = localStorage.getItem('userLoc');
-        const url = 'http://localhost:3000/search?search=' + search + '&loc=' + userLoc;
+        const url = API_URL + '/search?search=' + search + '&loc=' + userLoc;
         console.log('Constructed URL:', url);
         axios.get(url)
         .then((res)=>{
@@ -98,7 +99,7 @@ function Home(){
             }
 
             // console.log('userId','bookId', bookId,userId)
-            const url = 'http://localhost:3000/like-book'
+            const url =  API_URL + '/like-book'
             const data = {userId, bookId}
 
         axios.post(url,data)  
@@ -167,14 +168,10 @@ function Home(){
                         <div onClick ={()=>handleLike(item._id)} className="icon-con">
                         <FaHeart className='icons' />
                         </div>
-                        < img   width= "200px" height="100px" src= {'http://localhost:3000/' + item.bookimage}  />
-                        
-
+                        < img   width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>
-                        <p className="p-1 text-success">{item.bookprice}</p>
-                        
-                        
+                        <p className="p-1 text-success">{item.bookprice}</p>  
                     </div>)
                 })}
                 
@@ -193,7 +190,7 @@ function Home(){
                                                 <FaHeart className='icons  ' />
                                                 </div>
 
-                        < img   width= "200px" height="100px" src= {'http://localhost:3000/' + item.bookimage}  />
+                        < img   width= "200px" height="100px" src= { API_URL+'/' + item.bookimage}  />
                         
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>

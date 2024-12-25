@@ -2,6 +2,7 @@ import React,{useEffect,useState} from 'react'
 import { useParams } from 'react-router-dom'
 import axios from "axios";
 import Header from "./Header.jsx"
+import API_URL from '../constants.js';
 
 function ProductDetail() {
     const [Book, setBook] = useState();
@@ -12,7 +13,7 @@ function ProductDetail() {
     console.log(p.id);
 
     useEffect(()=>{
-        const url = 'http://localhost:3000/get-book/' + p.id;
+        const url = API_URL + '/get-book/' + p.id;
         axios.get(url)
         .then((res)=>{
             console.log(res)
@@ -30,7 +31,7 @@ function ProductDetail() {
     const handleContact = (addedBy)=>
     {
         console.log('id', addedBy)
-        const url = 'http://localhost:3000/get-user/' + addedBy;
+        const url = API_URL + '/get-user/' + addedBy;
         axios.get(url)
         .then((res)=>{
             console.log(res)
@@ -43,9 +44,7 @@ function ProductDetail() {
           })
     } 
 
-
   return (
-
     <div className='text-center '>
         <Header />
         <div className='p-3 text-pretty font-bold font-serif text-2xl underline text-cyan-700'>
@@ -57,7 +56,7 @@ function ProductDetail() {
         }
        {Book && <div className="d-flex justify-content-center flex-wrap">
             <div className= 'card m-3 text-center items-center p-3 font-medium text-black-900'>
-            < img  width= "500px" height="400px" src= {'http://localhost:3000/' + Book.bookimage} alt=""  />
+            < img  width= "500px" height="400px" src= {API_URL+ '/' + Book.bookimage} alt=""  />
             </div>
             <ul className='p-4 text-left'>
         <li className='p-2 ml-2 font-bold font-sans text-cyan-700 text-xl'>Book Description and info: {

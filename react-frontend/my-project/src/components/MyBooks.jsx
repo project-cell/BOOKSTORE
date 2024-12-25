@@ -8,6 +8,7 @@ import Categories from "./Categories.jsx";
 // import { FaRegHeart } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa'
 import './Home.css'
+import API_URL from "../constants.js";
 function MyBooks(){
     const navigate = useNavigate();
     const [Book, setBook] = useState([]);
@@ -23,7 +24,7 @@ function MyBooks(){
     },[])
 
     useEffect(()=>{
-        const url = 'http://localhost:3000/my-book'
+        const url = API_URL + '/my-book'
         let data ={userId : localStorage.getItem('userId')}
         axios.post(url,data )
         .then((res)=>{
@@ -75,7 +76,7 @@ function MyBooks(){
         const handleLike=(bookId)=>{
             let userId= localStorage.getItem('userId');
             console.log('userId','bookId', bookId,userId)
-            const url = 'http://localhost:3000/like-book'
+            const url = API_URL+'/like-book'
             const data = {userId, bookId}
 
         axios.post(url,data)
@@ -122,7 +123,7 @@ function MyBooks(){
                         <div onClick ={()=>handleLike(item._id)} className="icon-con">
                         <FaHeart className='icons' />
                         </div>
-                        < img   width= "200px" height="100px" src= {'http://localhost:3000/' + item.bookimage}  />
+                        < img   width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
                         
 
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
@@ -148,7 +149,7 @@ function MyBooks(){
                                                 <FaHeart className='icons  ' />
                                                 </div>
 
-                        < img   width= "200px" height="100px" src= {'http://localhost:3000/' + item.bookimage}  />
+                        < img   width= "200px" height="100px" src= {API_URL+'/' + item.bookimage}  />
                         
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>
@@ -157,10 +158,6 @@ function MyBooks(){
                 )
         })}   
             </div>
-
-          
-            
-     
         </div>
     )
 }

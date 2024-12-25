@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react'
 // import React,{ useEffect,useState } from "react"
 import Header from "./Header.jsx"
 import axios from 'axios';
+import API_URL from '../constants.js';
 
 
 export default function MyProfile() {
@@ -13,7 +14,7 @@ export default function MyProfile() {
 
 
         useEffect(()=>{
-            let url = 'http://localhost:3000/my-profile/'+ localStorage.getItem('userId');
+            let url = API_URL + '/my-profile/'+ localStorage.getItem('userId');
             axios.get(url)
             .then((res)=>{
             // setCBook(res.data.Book)
@@ -52,10 +53,7 @@ export default function MyProfile() {
             </tr>
         </thead>
         <tbody>
-        
-          
-            <tr className=" text-center  bg-rose-100 border-b dark:bg-gray-800 dark:border-gray-700">
-               
+            <tr className=" text-center  bg-rose-100 border-b dark:bg-gray-800 dark:border-gray-700"> 
             <td>{user.username}</td>
             <td>{user.email}</td>
             <td>{user.mobile}</td>
@@ -63,30 +61,5 @@ export default function MyProfile() {
         </tbody>
     </table>
 </div>
-
-        {/* <div className=" m-3 p-3">
-            <div className="text-center p-3 text-xl font-bold italic text-blue-500 ">
-            MyProfile
-            </div>
-       <div >
-       <table className="table-auto border-lime-100 " >
-        <tr>
-            <td>Username:</td>
-            <td>Email Id:</td>
-            <td>Contact Details:</td>
-        
-
-            </tr>
-            <tr>
-            <td>{user.username}</td>
-            <td>{user.email}</td>
-            <td>{user.mobile}</td>
-            </tr>
-       </table>
-       </div>  
-       </div> */}
-
-
     </div>
-  )
-}
+)}
