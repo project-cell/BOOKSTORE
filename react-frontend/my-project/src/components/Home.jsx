@@ -119,14 +119,14 @@ function Home(){
         }
 
     return (    
-        <div className="home  text-center">
+        <div className="home bg-gradient-to-t from-blue-300 to-pink-200 text-center">
             <Header search={search} handlesearch={handlesearch} handleClick={handleClick}/> 
             
           <div className=' p-1.5 z-20 via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
           <ul className='flex text-center gap-4 ml-7 text-clip font-semibold items-center'>
                {/* <ul className='flex gap-4 text-clip font-semibold '> */}
             { !!localStorage.getItem('token')&&<Link className="links" to="/Add_product"><button className="text-black"> Add Books </button></Link>}
-            
+            { !!localStorage.getItem('token')&&<Link className="links" to="/MyProfile"><button className="gap-3"> My Profile </button></Link>}
             {/* { !!localStorage.getItem('token')&&<Link className="links" to="/LikedBooks"><button className=""> Liked Books </button></Link>} */}
             {/* { !!localStorage.getItem('token')&&<Link className="links" to="/MyBooks"><button className=""> My Books </button></Link>} */}
             <div
@@ -137,9 +137,10 @@ function Home(){
             {showOver && 
                 <div className=' text-center  bg-gradient-to-t border-2 rounded-xl border-violet-300 from-blue-200 to-pink-200 w-40 ' style={{ display:'flex',justifyContent:'center'}}>
                     <ul>
-                    { !!localStorage.getItem('token')&&<Link className="links" to="/LikedBooks"><button className="left-4"> Liked Books </button></Link>}
+                    { !!localStorage.getItem('token')&&<Link className="links" to="/LikedBooks"><button className="left-4 "> Liked Books </button></Link>}
                    
-                    { !!localStorage.getItem('token')&&<Link className="links" to="/MyBooks"><button className=""> My Books </button></Link>}
+                    { !!localStorage.getItem('token')&&<Link className="links" to="/MyBooks"><button className="left-4 gap-3"> My Books </button></Link>}
+                  
                     </ul>
                 </div> } 
           

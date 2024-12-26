@@ -97,7 +97,8 @@ function LikedBooks(){
 
 
     return (    
-        <div className="home text-center">
+        <div className="home text-center  bg-gradient-to-t from-blue-500 to-pink-300 ">
+            {/* <div className="h-screen bg-gradient-to-t from-blue-300 to-pink-200"></div> */}
             <Header search={search} handlesearch={handlesearch} handleClick={handleClick}/> 
             
           <div className=' p-1.5 z-20 via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
@@ -156,8 +157,10 @@ function LikedBooks(){
                         <p className="p-1 text-success">{item.bookprice}</p> 
                     </div>
                 )
-        })}   
+        })}  
+         
             </div>
+            
         </div>
     )
 }

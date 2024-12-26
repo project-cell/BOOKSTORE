@@ -61,7 +61,8 @@ export default function Login() {
 //     }
 //   }
 return (
-    <div>
+    <div >
+      <div className='h-screen bg-gradient-to-t from-blue-300 to-pink-200'>
         <Header />
 
     <div className='p-8 max-w-lg mx-auto gap-8 items-center '>
@@ -111,6 +112,7 @@ return (
         <span className='text-violet-500 '>Sign up</span></Link>
         
       </div>
+    </div>
     </div>
     </div>
   )

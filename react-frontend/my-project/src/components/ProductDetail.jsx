@@ -45,7 +45,7 @@ function ProductDetail() {
     } 
 
   return (
-    <div className='text-center '>
+    <div className='text-center h-full bg-gradient-to-t from-blue-300 to-pink-200" '>
         <Header />
         <div className='p-3 text-pretty font-bold font-serif text-2xl underline text-cyan-700'>
         BOOK DETAILS:

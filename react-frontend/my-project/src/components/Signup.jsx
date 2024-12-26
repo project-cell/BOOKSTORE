@@ -71,9 +71,9 @@ const handleMobileChange = (e) => {
     setmobile(value);
 };
 return (
-    <div>
+    <div >
+        <div className='bg-gradient-to-t from-blue-300 to-pink-200'>
         <Header />
-
     <div className='p-8 max-w-lg mx-auto gap-8 items-center '>
       <h1 className='text-4xl font-serif mt-4 text-center  text-rose-700 font-semibold gap-2'> Sign-Up</h1>
       {/* <form onSubmit={handleSubmit} className ='flex flex-col p-4 gap-6'> */}
@@ -150,6 +150,7 @@ return (
         <span className='text-violet-500 '>Login  </span></Link>
         
       </div>
+    </div>
     </div>
     </div>
   )

@@ -54,7 +54,7 @@ import API_URL from '../constants'
         
     return (
         
-        <div className="home text-center flex flex-col  "> 
+        <div className="home h-screen bg-gradient-to-t from-blue-300 to-pink-200 text-center flex flex-col  "> 
             <Header />
         <h2 className='links text-3xl font-bold text-center bg-gradient-to-r from-blue-500 to-pink-500 text-transparent bg-clip-text pt-3' >
                         Add Books

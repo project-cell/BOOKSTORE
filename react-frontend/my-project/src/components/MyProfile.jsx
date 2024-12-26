@@ -8,11 +8,6 @@ import API_URL from '../constants.js';
 export default function MyProfile() {
 
        const[user,setuser]= useState({})
-
-
-
-
-
         useEffect(()=>{
             let url = API_URL + '/my-profile/'+ localStorage.getItem('userId');
             axios.get(url)
@@ -33,11 +28,12 @@ export default function MyProfile() {
     <div >
         <Header /> 
 
-<div className="  ml-20 p-10">
-<div className="text-center text-3xl p-3 font-bold italic mr-28 text-blue-500 ">
+<div className=" bg-gradient-to-t h-screen w-full from-blue-300 to-pink-200  ">
+<div className="text-center  text-3xl p-3 font-bold  text-blue-500 ">
             My Profile
             </div>
-    <table className="ml-96 place-items-center shadow-md sm:rounded-lg h-28 table-auto text-sm text-left rtl:text-right text-gray-700 dark:text-gray-900">
+            <div className="flex flex-col items-center justify-center  w-full ">
+    <table className="items-center shadow-md sm:rounded-lg h-28 table-auto text-sm text-left rtl:text-right text-gray-700 dark:text-gray-900">
         <thead className="text-xs text-center  text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
             <tr className=''> 
                 <th scope="col" class="px-6 py-3">
@@ -60,6 +56,7 @@ export default function MyProfile() {
             </tr>
         </tbody>
     </table>
+    </div>
 </div>
     </div>
 )}

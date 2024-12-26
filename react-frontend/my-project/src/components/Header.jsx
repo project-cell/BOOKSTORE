@@ -58,7 +58,7 @@ function Header(props){
 
     return (
         
-         <div className='header bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-blue-300 to-pink-200
+         <div className='header  bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-blue-300 to-pink-200
     overflow-hidden '>     
     
     <h1 className=' text-center items-center font-bold  text-lg font-sans italic  bg-gradient-to-r  from-blue-700 to-indigo-950 text text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore 
