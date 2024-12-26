@@ -51,17 +51,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // MongoDB connection
-// const mongoURL =  'mongodb+srv://helloworld:Ho6oGu69Zd1yEygz@cluster0.yduksfk.mongodb.net/Bookrecycle?retryWrites=true&w=majority';
+const mongoURL =  'mongodb+srv://helloworld:Ho6oGu69Zd1yEygz@cluster0.yduksfk.mongodb.net/Bookrecycle?retryWrites=true&w=majority';
 // const mongoURL =  'mongodb://localhost:27017/Bookrecycle';
-const mongoURL =  'mongodb://127.0.0.1:27017/Bookrecycle';
+// const mongoURL =  'mongodb://127.0.0.1:27017/Bookrecycle';
 mongoose.connect(mongoURL, {serverSelectionTimeoutMS: 20000 })
     .then(() => console.log('Connected to MongoDB server'))
     .catch((error) => {
         console.error('Error connecting to MongoDB:', error);
         // process.exit(1);
     });
-
-
 const db = mongoose.connection;
 db.on("disconnected", () => {
     console.log('Disconnected from MongoDB server');
@@ -70,13 +68,12 @@ db.on("error", (error) => {
     console.log('Error in MongoDB server:', error);
 });
 
-// const allowedOrigins = ['http://localhost:5173', 'https://singular-sable-9f0800.netlify.app'];
 // Allow requests from both localhost and your Netlify
  const allowedOrigins = ['http://localhost:5173', 'https://charming-elf-5fd748.netlify.app'];
 // const allowedOrigins = ['http://localhost:5173', 'https://graceful-mochi-c75f24.netlify.app/'];
 app.use(cors({
   origin: allowedOrigins,
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+ methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
   credentials: true // if you need to allow cookies or authentication
 }));
 
