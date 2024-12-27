@@ -15,6 +15,9 @@ function CategoryPage(){
     const param = useParams()
     console.log(param)
     const [Book, setBook] = useState([]);
+    const [Refresh, setRefresh] = useState(false);//my books
+    const [LikedBook, setLikedBook] = useState([]);//liked books
+    console.log(LikedBook)
     const [CBook, setCBook] = useState([]);
     const [search, setsearch] = useState('');
     const [issearch, setissearch] = useState(false);
@@ -41,7 +44,21 @@ function CategoryPage(){
           alert('something went wrong')
           })
 
-    },[param])
+          const url2 = API_URL+'/liked-book'
+        let data ={userId : localStorage.getItem('userId')}
+        axios.post(url2,data)
+        .then((res)=>{
+            console.log(res)
+            if (res.data.Book){
+                setLikedBook(res.data.Book);
+
+            }
+          }).catch((er)=>{
+          console.log(er);
+          alert('something went wrong')
+          })
+
+    },[param,Refresh])
 
     //useEffect is a hook that allows you to run some side effect after rendering the component
     const handlesearch=(value)=>{
@@ -73,7 +90,7 @@ function CategoryPage(){
                 // });
                 // setCBook(filteredBooks)
     }
-        const handleCategory = (value)=>{
+    const handleCategory = (value)=>{
             let filteredBooks =Book.filter((item,index)=>{
                 // console.log(value,'v')
                 // console.log(item)
@@ -88,7 +105,8 @@ function CategoryPage(){
 
         }
 
-        const handleLike=(bookId)=>{
+        const handleLike=(bookId,e)=>{
+            e.stopPropagation()
             let userId= localStorage.getItem('userId');
             console.log('userId','bookId', bookId,userId)
             const url = API_URL+'/like-book'
@@ -98,7 +116,8 @@ function CategoryPage(){
         .then((res)=>{
             console.log(res)
             if (res.data.message){
-                alert('Liked:)')
+                // alert('Liked:)')
+                setRefresh(!Refresh)
           }
           }).catch((er)=>{
             console.log(er);
@@ -106,13 +125,38 @@ function CategoryPage(){
           })
         }
 
-        const handleProduct = (id) =>{
+    const handleDisLike=(bookId,e)=>{
+            e.stopPropagation()
+            let userId= localStorage.getItem('userId');
+            if(!userId){
+                alert('Please login to like a book')
+                return;
+            }
+
+            // console.log('userId','bookId', bookId,userId)
+            const url =  API_URL + '/dislike-book'
+            const data = {userId, bookId}
+
+        axios.post(url,data)  
+        .then((res)=>{
+            console.log(res)
+            if (res.data.message){
+                // alert('DisLiked!')
+                setRefresh(!Refresh)
+              }
+          }).catch((er)=>{
+
+        alert('something went wrong')
+          })
+        }
+
+    const handleProduct = (id) =>{
             navigate('/ProductDetail/' + id)
         }
 
     return (    
-        <div className="home text-center">
-            <div className=" h-screen bg-gradient-to-t from-blue-300 to-pink-200">
+        <div className="home w-screen text-center">
+            <div className=" h-full w-full bg-gradient-to-t from-blue-300 to-pink-200">
             <Header search={search} handlesearch={handlesearch} handleClick={handleClick}/> 
             
           <div className=' p-1.5 z-20 via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
@@ -165,18 +209,29 @@ function CategoryPage(){
             return(
                 
                     //  key={item.id}
-                    <div onClick={() => handleProduct(item._id)} key={ item._id} className= 'card m-3 cursor-pointer text-center items-center p-2 font-medium text-black-900' >
-                                                {/* < FaRegHeart className="gap-2"/> */}
-                                                <div onClick ={()=>handleLike(item._id)} className="icon-con">
-                                                <FaHeart className='icons  ' />
-                                                </div>
+    <div onClick={() => handleProduct(item._id)} key={ item._id} className= 'card m-3 cursor-pointer text-center items-center p-2 font-medium text-black-900' >
+     {/* < FaRegHeart className="gap-2"/> */}
+     <div className="icon-con">
+    
+    {
+                            LikedBook.find((likedItem)=> likedItem._id == item._id)?
+                            <FaHeart  onClick ={(e)=> handleDisLike(item._id,e) } className='red-icons' />
+                            :
+                            <FaHeart   onClick ={(e)=> handleLike(item._id,e) } className='icons' />
+                            
+                        }
+    </div>
 
-                        < img   width= "200px" height="100px" src= { API_URL + '/' + item.bookimage}  />
+        < img   width= "200px" height="100px" src= { API_URL + '/' + item.bookimage}  />
                         
-                        <p className="p-1">{item.bookname} | {item.bookcategory} </p>
-                        <p className="p-1 text-success">{item.description}</p>
-                        <p className="p-1 text-success">{item.bookprice}</p> 
-                    </div>
+        <p className="p-1">{item.bookname} | {item.bookcategory}
+        </p>
+        <p className="p-1 text-success">{item.description}
+        </p>
+        <p className="p-1 text-success">{item.bookprice}
+        </p> 
+    
+    </div>
                 )
         })}   
             </div>}

@@ -14,6 +14,7 @@ function MyBooks(){
     const [Book, setBook] = useState([]);
     const [CBook, setCBook] = useState([]);
     const [search, setsearch] = useState('');
+    const [refresh, setrefresh] = useState('false');
 
 
     useEffect(()=>{
@@ -38,7 +39,7 @@ function MyBooks(){
           alert('something went wrong')
           })
 
-    },[])
+    },[refresh])
 
     //useEffect is a hook that allows you to run some side effect after rendering the component
     const handlesearch=(value)=>{
@@ -95,6 +96,32 @@ function MyBooks(){
             navigate('/ProductDetail/' + id)
         }
 
+        const handleDel =(bookId)=>{
+            // console.log(bid)
+            if(!localStorage.getItem('userId')){
+                alert('please login first')
+                return;
+            }
+            const url = API_URL+'/delete-book';
+            const data = {
+                bookId:bookId,
+                userId :localStorage.getItem('userId')
+            }
+            axios.post(url,data)
+            .then((res)=>{
+                console.log(res)
+                if (res.data.message){
+                    alert('Deleted:(')
+                    setrefresh(!refresh)
+                }
+              }).catch((er)=>{
+              console.log(er);
+              alert('something went wrong')
+              })
+            }
+
+        
+
 
     return (    
         <div className="home bg-gradient-to-t from-blue-300 to-pink-200 text-center">
@@ -112,7 +139,7 @@ function MyBooks(){
 
 {/* click control frontend */}
 
-            <h5 className="text-pretty font-bold text-2xl text-sky-700">My Favourites </h5>
+            <h5 className="text-pretty font-bold text-2xl text-sky-700">My Books </h5>
            <div className="d-flex justify-content-center p-2 flex-wrap">
             {CBook && CBook.length>0 && 
             CBook.map(( item,index)=>{
@@ -123,41 +150,47 @@ function MyBooks(){
                         <div onClick ={()=>handleLike(item._id)} className="icon-con">
                         <FaHeart className='icons' />
                         </div>
-                        < img   width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
-                        
-
+                        < img  width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>
                         <p className="p-1 text-success">{item.bookprice}</p>
+                        {/* <button className="p-1 text-success">Delete Book</button> */}
                         
                         
                     </div>)
+                
                 })}
                 
             </div>
        
-        <div className="d-flex justify-content-center p-2 flex-wrap">
+        <div className="d-flex justify-content-center  p-2 flex-wrap">
             
             {Book && Book.length>0 && 
             Book.map(( item,index)=>{
             return(
-                
-                    //  key={item.id}
-                    <div  onClick={() => handleProduct(item._id)} key={ item._id} className= 'card m-3 text-center items-center p-2 font-medium text-black-900' >
+                <div >
+                                          {/* key={item.id} */}
+                    <div  onClick={() => handleProduct(item._id)} key={ item._id} className= 'card bg-slate-300 m-3 text-center items-center p-2 font-medium text-black-900' >
                                                 {/* < FaRegHeart className="gap-2"/> */}
-                                                <div onClick ={()=>handleLike(item._id)} className="icon-con">
-                                                <FaHeart className='icons  ' />
-                                                </div>
+                    <div onClick ={()=>handleLike(item._id)} className="icon-con">
+                    <FaHeart className='icons  ' /></div>
 
-                        < img   width= "200px" height="100px" src= {API_URL+'/' + item.bookimage}  />
-                        
+                        < img   width= "200px" height="120px" src= {API_URL+'/' + item.bookimage}  />
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>
                         <p className="p-1 text-success">{item.bookprice}</p> 
+                        {/* <button onClick={()=>{handleDel(item._id)}} className="p-1 text-balance text-red-600 font-serif font-bold">Remove Book</button> */}
+                    </div>
+                    <Link to = { `/edit/${item._id} `} className=" flex text-center underline text-red-600 font-serif font-bold ">Edit</Link>
+                    <button onClick={()=>{handleDel(item._id)}} className=" flex text-center text-red-600 font-serif font-bold gap-4">Remove </button>
                     </div>
                 )
+                
+                
         })}   
+        
             </div>
+            
         </div>
     )
 }

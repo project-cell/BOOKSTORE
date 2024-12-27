@@ -10,7 +10,7 @@ import API_URL from '../constants'
         const navigate = useNavigate();
         const [bookname, setbookname] = useState("");
         const [description, setdescription] = useState("");
-        const [bookprice, setbookprice] = useState("Rs. ");
+        const [bookprice, setbookprice] = useState(" ");
         const [bookcategory, setbookcategory] = useState("");
         const [bookimage, setbookimage] = useState("");
         useEffect(()=>{
@@ -54,25 +54,25 @@ import API_URL from '../constants'
         
     return (
         
-        <div className="home h-screen bg-gradient-to-t from-blue-300 to-pink-200 text-center flex flex-col  "> 
+        <div className="home h-full bg-gradient-to-t from-blue-300 to-pink-200 text-center flex flex-col  "> 
             <Header />
         <h2 className='links text-3xl font-bold text-center bg-gradient-to-r from-blue-500 to-pink-500 text-transparent bg-clip-text pt-3' >
                         Add Books
         </h2>
             <div className='font-bold font-sans p-2  '>
             <label className='p-1'> Book name</label>
-            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='text' placeholder='Book name' value={bookname}
+            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='text' placeholder='Book name:' value={bookname}
              onChange={(e)=>{setbookname(e.target.value)}}
              ></input>
 
             <label className='p-1'> Description</label>
-            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg' type='text' placeholder='Description' value={description} onChange={(e)=>{setdescription(e.target.value)}}></input>
+            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg' type='text' placeholder='Description:' value={description} onChange={(e)=>{setdescription(e.target.value)}}></input>
 
             <label className='p-1'>Book price</label>
-            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='text' placeholder='Book price' value={bookprice} onChange={(e)=>{setbookprice(e.target.value)}}></input>
+            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='number' placeholder='Book price: max amount 999' value={bookprice} onChange={(e)=>{setbookprice(e.target.value)}} min="0" max="999"></input>
 
             <label className='p-1'>Book Category</label>
-            <select className= 'form-control max-w-lg mx-auto gap-5 bg-slate-200 p-2 rounded-lg' type='text' placeholder='Book category' value={bookcategory} onChange={(e)=>{setbookcategory(e.target.value)}}>
+            <select className= 'form-control max-w-lg mx-auto gap-5 bg-slate-200 p-2 rounded-lg' type='text' placeholder='Book category:' value={bookcategory} onChange={(e)=>{setbookcategory(e.target.value)}}>
                 <option>Book category:</option>
                 <option> None</option>
                 <option> NCERT </option>
@@ -85,7 +85,7 @@ import API_URL from '../constants'
             </select>
 
             <label className='p-1'> Book image</label>
-            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='file' placeholder='Book image' 
+            <input className='form-control  max-w-lg mx-auto gap-5  bg-slate-200 p-2 rounded-lg ' type='file' placeholder='Book image:' 
              onChange={(e)=>{setbookimage(e.target.files[0])}}
              ></input>
 

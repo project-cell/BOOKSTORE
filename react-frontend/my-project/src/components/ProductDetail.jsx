@@ -8,7 +8,6 @@ function ProductDetail() {
     const [Book, setBook] = useState();
     const [user, setUser] = useState();
     // console.log(user, "userrrr")
-
     const p  = useParams();
     console.log(p.id);
 
@@ -20,8 +19,8 @@ function ProductDetail() {
             if (res.data.Book){
                 setBook(res.data.Book);
             }
-          }).catch((er)=>{
           console.log(er);
+          }).catch((er)=>{
           alert('something went wrong')
           })
 
@@ -55,7 +54,7 @@ function ProductDetail() {
             Book && <div className='text-2xl font-serif font-bold'> {Book.bookname} </div>
         }
        {Book && <div className="d-flex justify-content-center flex-wrap">
-            <div className= 'card m-3 text-center items-center p-3 font-medium text-black-900'>
+            <div className= 'card bg-slate-600 m-3 text-center items-center p-3 font-medium text-black-900'>
             < img  width= "500px" height="400px" src= {API_URL+ '/' + Book.bookimage} alt=""  />
             </div>
             <ul className='p-4 text-left'>

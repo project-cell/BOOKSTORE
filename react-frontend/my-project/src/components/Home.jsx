@@ -13,8 +13,11 @@ import { BiDetail } from 'react-icons/bi'
 import API_URL from "../constants.js";
 function Home(){
     const navigate = useNavigate();
-    const [Book, setBook] = useState([]);
-    const [CBook, setCBook] = useState([]);
+    const [Book, setBook] = useState([]);//my books
+    const [Refresh, setRefresh] = useState(false);//my books
+    const [LikedBook, setLikedBook] = useState([]);//liked products
+    console.log(LikedBook)
+    const [CBook, setCBook] = useState([]);//searched products
     const [search, setsearch] = useState('');
     const [issearch, setissearch] = useState(false);
     const [showOver,setshowOver] = useState(false)
@@ -40,10 +43,22 @@ function Home(){
           alert('something went wrong')
           })
 
-    },[])
+        const url2 = API_URL+'/liked-book'
+        let data ={userId : localStorage.getItem('userId')}
+        axios.post(url2,data)
+        .then((res)=>{
+            console.log(res)
+            if (res.data.Book){
+                setLikedBook(res.data.Book);
+
+            }
+          }).catch((er)=>{
+          console.log(er);
+          alert('something went wrong')
+          })
+
+    },[Refresh])
     //useEffect is a hook that allows you to run some side effect after rendering the component
-
-
 
     const handlesearch=(value)=>{
         setsearch(value);
@@ -106,7 +121,33 @@ function Home(){
         .then((res)=>{
             console.log(res)
             if (res.data.message){
-                alert('Liked:)')
+                // alert('Liked:)')
+                setRefresh(!Refresh)
+              }
+          }).catch((er)=>{
+
+        alert('something went wrong')
+          })
+        }
+
+        const handleDisLike=(bookId,e)=>{
+            e.stopPropagation()
+            let userId= localStorage.getItem('userId');
+            if(!userId){
+                alert('Please login to like a book')
+                return;
+            }
+
+            // console.log('userId','bookId', bookId,userId)
+            const url =  API_URL + '/dislike-book'
+            const data = {userId, bookId}
+
+        axios.post(url,data)  
+        .then((res)=>{
+            console.log(res)
+            if (res.data.message){
+                // alert('DisLiked!')
+                setRefresh(!Refresh)
               }
           }).catch((er)=>{
 
@@ -119,14 +160,15 @@ function Home(){
         }
 
     return (    
-        <div className="home bg-gradient-to-t from-blue-300 to-pink-200 text-center">
+        <div className="home bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-green-500 to-violet-400
+    overflow-hidden w-screen text-center">
             <Header search={search} handlesearch={handlesearch} handleClick={handleClick}/> 
             
           <div className=' p-1.5 z-20 via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
-          <ul className='flex text-center gap-4 ml-7 text-clip font-semibold items-center'>
+          <ul className='flex gap-4 text-justify font-semibold '>
                {/* <ul className='flex gap-4 text-clip font-semibold '> */}
-            { !!localStorage.getItem('token')&&<Link className="links" to="/Add_product"><button className="text-black"> Add Books </button></Link>}
-            { !!localStorage.getItem('token')&&<Link className="links" to="/MyProfile"><button className="gap-3"> My Profile </button></Link>}
+            { !!localStorage.getItem('token')&&<Link className="links" to="/Add_product"><button className=" text-black"> Add Books </button></Link>}
+            { !!localStorage.getItem('token')&&<Link className="links" to="/MyProfile"><button className=""> My Profile </button></Link>}
             {/* { !!localStorage.getItem('token')&&<Link className="links" to="/LikedBooks"><button className=""> Liked Books </button></Link>} */}
             {/* { !!localStorage.getItem('token')&&<Link className="links" to="/MyBooks"><button className=""> My Books </button></Link>} */}
             <div
@@ -164,9 +206,9 @@ function Home(){
             CBook.map(( item,index)=>{ 
                 return(
                     //  key={item.id}
-                    <div     key={ item._id} className= 'card m-3 text-center items-center p-2 font-medium text-black-900' >
+                    <div     key={ item._id} className= 'card card:hover m-3 text-center items-center p-2 font-medium text-black-900' >
                         {/* <AiOutlineHeart /> */}
-                        <div onClick ={()=>handleLike(item._id)} className="icon-con">
+                        <div onClick ={()=>handleLike(item._id)} className="icon-con ">
                         <FaHeart className='icons' />
                         </div>
                         < img   width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
@@ -187,15 +229,22 @@ function Home(){
                     //  key={item.id}
                     <div onClick={() => handleProduct(item._id)} key={ item._id} className= 'card m-3 cursor-pointer text-center items-center p-2 font-medium text-black-900' >
                                                 {/* < FaRegHeart className="gap-2"/> */}
-                    <div onClick ={(e)=> handleLike(item._id,e) } className="icon-con">
-                                                <FaHeart className='icons  ' />
-                                                </div>
+                    <div className="icon-con">
+                        {
+                            LikedBook.find((likedItem)=> likedItem._id == item._id)?
+                            <FaHeart  onClick ={(e)=> handleDisLike(item._id,e) } className='red-icons' />
+                            :
+                            <FaHeart   onClick ={(e)=> handleLike(item._id,e) } className='icons' />
+                            
+                        }
+                                                
+                        </div>
 
                         < img   width= "200px" height="100px" src= { API_URL+'/' + item.bookimage}  />
                         
                         <p className="p-1">{item.bookname} | {item.bookcategory} </p>
                         <p className="p-1 text-success">{item.description}</p>
-                        <p className="p-1 text-success">{item.bookprice}</p> 
+                        <p className="p-1 text-success">Rs. {item.bookprice} /- </p> 
                     </div>
                 )
         })}   

@@ -15,6 +15,7 @@ import ProductDetail from './components/ProductDetail.jsx';
 import CategoryPage from './components/CategoryPage.jsx';
 import MyBooks from './components/MyBooks';
 import MyProfile from './components/MyProfile.jsx';
+import Edit_books from './components/Edit_books.jsx';
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,13 @@ element: (<About/>)
   // id is param
   element: (<ProductDetail/>)
 },
+
+{
+  path: "/edit/:id",
+  // id is param
+  element: (<Edit_books/>)
+},
+
 {
   path: "/CategoryPage/:catName",
   element: (<CategoryPage/>)

@@ -96,12 +96,13 @@ function LikedBooks(){
         }
 
 
-    return (    
-        <div className="home text-center  bg-gradient-to-t from-blue-500 to-pink-300 ">
+    return (   
+        <div className="w-full bg-gradient-to-t from-blue-500 to-pink-400">
+        <div className="home text-center  ">
             {/* <div className="h-screen bg-gradient-to-t from-blue-300 to-pink-200"></div> */}
             <Header search={search} handlesearch={handlesearch} handleClick={handleClick}/> 
             
-          <div className=' p-1.5 z-20 via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
+          <div className=' p-1.5 z-20  via-slate-500 font-semibold bg-purple-200 bg-opacity-100 backdrop-filter backdrop-blur-xl shadow-gray-950 justify-center overflow-hidden '> 
           <ul className='flex text-center gap-4 ml-7 text-clip font-semibold items-center'>
                {/* <ul className='flex gap-4 text-clip font-semibold '> */}
             { !!localStorage.getItem('token')&&<Link className="links" to="/Add_product"><button className=""> Add Books </button></Link>}
@@ -119,7 +120,7 @@ function LikedBooks(){
             CBook.map(( item,index)=>{
                 return(
                     //  key={item.id}
-                    <div key={ item._id} className= 'card m-3 cursor-pointer text-center items-center p-2 font-medium text-black-900' >
+                    <div key={ item._id} className= 'card bg-slate-400 m-3 cursor-pointer text-center items-center p-2 font-medium text-black-900' >
                         {/* <AiOutlineHeart /> */}
                         <div onClick ={()=>handleLike(item._id)} className="icon-con">
                         <FaHeart className='icons' />
@@ -147,7 +148,7 @@ function LikedBooks(){
                     <div  onClick={() => handleProduct(item._id)} key={ item._id} className= 'card m-3 text-center items-center p-2 font-medium text-black-900' >
                                                 {/* < FaRegHeart className="gap-2"/> */}
                                                 <div onClick ={()=>handleLike(item._id)} className="icon-con">
-                                                <FaHeart className='icons  ' />
+                                                <FaHeart className='red-icons  ' />
                                                 </div>
 
                         < img   width= "200px" height="100px" src= {API_URL + '/' + item.bookimage}  />
@@ -161,6 +162,7 @@ function LikedBooks(){
          
             </div>
             
+        </div>
         </div>
     )
 }

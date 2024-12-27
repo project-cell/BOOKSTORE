@@ -127,6 +127,27 @@ const getBooks = (req,res)=>{
 )
 }
 
+const deleteBooks =(req,res)=>{
+    console.log(req.body)
+    Books.findOne({_id: req.body.bookId})
+    .then((result)=>{
+        // console.log(result.addedBy == req.body.userId)
+        if(result.addedBy == req.body.userId){
+            Books.deleteOne({_id : req.body.bookId})
+            .then((deleter) => {
+                if(deleter.acknowledged){
+                res.send({ message: 'Book deleted successfully' });
+                }
+            })
+        }
+        })
+    .catch((error)=>{
+         console.error('Error deleting book:', error); // Log the error
+            })
+}
+
+
+
 const getBookId = (req,res)=>{
     // console.log(req.params)
     if (req.params) {
@@ -158,4 +179,4 @@ const myBooks =(req,res)=>{
 }
 
 
-export  {search, addProducts , getBooks, getBookId, myBooks};
+export  {search, addProducts ,deleteBooks, getBooks, getBookId, myBooks};

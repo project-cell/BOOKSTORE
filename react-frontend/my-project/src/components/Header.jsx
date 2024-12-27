@@ -58,16 +58,16 @@ function Header(props){
 
     return (
         
-         <div className='header  bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t from-blue-300 to-pink-200
+         <div className='header bg-violet-300 bg-opacity-50 backdrop-filter backdrop-blur-xl shadow-xl bg-gradient-to-t  from-indigo-700 to-rose-600
     overflow-hidden '>     
     
-    <h1 className=' text-center items-center font-bold  text-lg font-sans italic  bg-gradient-to-r  from-blue-700 to-indigo-950 text text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore 
+    <h1 className=' text-center items-center font-bold  text-lg font-sans italic  bg-gradient-to-r  from-lime-400 to-yellow-500 text text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore 
         
     </h1>
             <div className="  flex justify-items-center gap-4 items-center max-w-6xl mx-auto p-2" >
             {/* <h1 className=' text-left place-items-start font-medium  bg-gradient-to-r from-teal-700 to-pink-700 text-transparent bg-clip-text'> Pages that connect, futures that reflect! A Handy BookStore</h1> */}
                 <Link to ='/'> 
-                 <h1 className=' text-left place-items-start font-bold text-lg bg-gradient-to-r from-teal-700 to-pink-700  text-transparent bg-clip-text'>Home </h1>
+                 <h1 className=' text-left  font-bold text-lg bg-gradient-to-r from-teal-300 to-pink-300  text-transparent bg-clip-text'>Home </h1>
                 </Link>
                 
 
@@ -102,11 +102,11 @@ function Header(props){
                  </button>
                 {/* <input type="text"/> */}
                     <ul className='flex gap-4 text-justify font-semibold '>
-                    <Link to='/About'><li className='font-serif '>About</li></Link> 
-                    <Link to='/signup'><li className='font-serif '>Signup</li></Link>
+                    <Link to='/About'><li className='font-serif text-black'>About</li></Link> 
+                    <Link to='/signup'><li className='font-serif text-black '>Signup</li></Link>
                 { !localStorage.getItem ('token')?
-                <Link to='/login'><li className='font-serif'>Login</li></Link> :
-                <button onClick={handleLogout} className='font-serif'>Logout</button>
+                <Link to='/login'><li className='font-serif text-black'>Login</li></Link> :
+                <button onClick={handleLogout} className='font-serif text-black'>Logout</button>
                 }
                 
                 </ul>  

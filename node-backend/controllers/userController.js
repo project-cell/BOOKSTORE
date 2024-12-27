@@ -30,6 +30,27 @@ const likeProducts = (req,res) =>{
     })
 
 }
+
+const dislikeProducts = (req,res) =>{
+    console.log(req.body)
+    let bookId = req.body.bookId;
+   
+    let userId = req.body.userId;
+    if (!bookId || !userId) {
+        return res.status(400).send({ message: 'bookId and userId are required' });
+    }
+   
+    
+    Users.updateOne({ _id: userId}, { $pull:{ likedBooks: bookId}})
+    .then(() => {
+        res.send({ message: 'Book disliked ' });
+    }).catch((error)=>{
+        console.error('Error', error); // Log the error
+        res.send({ message: 'Error' });
+    })
+
+}
+
 const signup = async (req, res) => {
     const { username, password, email, mobile} = req.body;
     console.log(`Signup attempt for username: ${username}`); // Log signup attempt
@@ -127,4 +148,4 @@ const likedbooks =(req,res)=>{
 }
 
 
-export {likeProducts,signup,login, userId,Myprofile,likedbooks};
+export {likeProducts,signup,login,dislikeProducts, userId,Myprofile,likedbooks};
